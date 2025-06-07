@@ -3,7 +3,7 @@ namespace Spike.TopstepX.Api.Apis
 {
     public interface IProjectXApi
     {
-        IAccountApi Account { get; }
+        IAccountApi Accounts { get; }
         IMarketDataApi MarketData { get; }
         IOrdersApi Orders { get; }
         IPositionsApi Positions { get; }
