@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spike.TopstepX.Api.Models.Orders
+﻿namespace Spike.TopstepX.Api.Models.Orders
 {
+    /// <summary>
+    /// Represents the status of an order in the TopstepX API.
+    /// </summary>
     public enum OrderStatus
     {
         Unknown = 0,

@@ -1,20 +1,23 @@
 ﻿namespace Spike.TopstepX.Api.Models.MarketData
 {
-    public class ContractSearchRequest
+    /// <summary>
+    /// Represents a request to search for contracts in the TopstepX API.
+    /// </summary>
+    public record ContractSearchRequest
     {
         /// <summary>
-        /// The name of the contract to search for.
+        /// Gets or sets the the id of the contract to search for.
         /// </summary>
-        public string SearchText { get; set; } = string.Empty;
+        public string? ContractId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Whether to search for contracts using the sim/live data subscription.
+        /// Gets or sets the name of the contract to search for.
+        /// </summary>
+        public string? SearchText { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the whether to search for contracts using the sim/live data subscription.
         /// </summary>
         public bool Live { get; set; } = true;
-
-        /// <summary>
-        /// The id of the contract to search for.
-        /// </summary>
-        public string ContractId { get; set; } = string.Empty;
     }
 }

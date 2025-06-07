@@ -2,6 +2,9 @@
 
 namespace Spike.TopstepX.Api.Models.MarketData
 {
+    /// <summary>
+    /// A market data candle request.
+    /// </summary>
     public record CandleRequest
     {
         /// <summary>

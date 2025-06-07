@@ -1,7 +1,11 @@
-﻿namespace Spike.TopstepX.Api.Models.Positions
+﻿using Spike.TopstepX.Api.Models;
+
+namespace Spike.TopstepX.Api.Models.Positions
 {
-    public record SearchResponse : DefaultResponse
+    /// <summary>
+    /// Represents a response containing a list of positions.
+    /// </summary>
+    public record SearchResponse : DefaultResponse<Position>
     {
-        public List<Position> Positions { get; set; } = new List<Position>();
     }
 }

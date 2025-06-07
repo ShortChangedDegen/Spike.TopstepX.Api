@@ -1,13 +1,10 @@
 ﻿namespace Spike.TopstepX.Api.Models.Account
 {
-    public class SearchResponse
+    /// <summary>
+    /// Represents a response containing a list of accounts.
+    /// </summary>
+    /// <param name="accounts">The matching accounts.</param>
+    public record SearchResponse() : DefaultResponse<SearchResult>
     {
-        public List<SearchResult> Accounts { get; set; } = new List<SearchResult>();
-
-        public bool Success { get; set; }
-
-        public int ErrorCode { get; set; }
-
-        public string ErrorMessage { get; set; } = string.Empty;
     }
 }

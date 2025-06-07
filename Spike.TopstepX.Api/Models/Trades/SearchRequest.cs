@@ -1,17 +1,30 @@
 ﻿namespace Spike.TopstepX.Api.Models.Trades
 {
+    /// <summary>
+    /// Represents a request to search for trades within a specific account
+    /// and time range.
+    /// </summary>
     public record SearchRequest
     {
         /// <summary>
-        /// The account ID.
+        /// Default Constructor for SearchRequest.
+        /// </summary>
+        public SearchRequest()
+        {
+        }
+
+        /// <summary>
+        /// Gets the account ID.
         /// </summary>
         public required int AccountId { get; set; }
+
         /// <summary>
-        /// Gets or sets the start timestamp for the search.
+        /// Getsthe start timestamp for the search.
         /// </summary>
         public required DateTime StartTimestamp { get; set; }
+
         /// <summary>
-        /// Gets or sets the end timestamp for the search.
+        /// Gets the end timestamp for the search.
         /// </summary>
         public DateTime EndTimestamp { get; set; }
     }

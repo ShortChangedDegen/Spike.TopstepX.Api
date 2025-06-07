@@ -1,7 +1,9 @@
 ﻿namespace Spike.TopstepX.Api.Models.MarketData
 {
-    public record CandleResponse : DefaultResponse
+    /// <summary>
+    /// A response containing a collection of candles.
+    /// </summary>
+    public record CandleResponse : DefaultResponse<Candle>
     {
-        public List<Candle> Bars { get; set; } = new List<Candle>();
     }
 }

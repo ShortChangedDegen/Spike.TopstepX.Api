@@ -1,10 +1,10 @@
 ﻿namespace Spike.TopstepX.Api.Models.Trades
 {
-    public record SearchResponse : DefaultResponse
+    /// <summary>
+    /// Represents a response containing a list of trades for a
+    /// specific account.
+    /// </summary>
+    public record SearchResponse : DefaultResponse<Trade>
     {
-        /// <summary>
-        ///     Gets or sets the list of trades.
-        /// </summary>
-        public List<Trade> Trades { get; set; } = new List<Trade>();
     }
 }

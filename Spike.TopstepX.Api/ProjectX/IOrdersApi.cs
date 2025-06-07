@@ -2,7 +2,7 @@
 using Spike.TopstepX.Api.Models;
 using Spike.TopstepX.Api.Models.Orders;
 
-namespace Spike.TopstepX.Api.Apis.ProjectX
+namespace Spike.TopstepX.Api.ProjectX
 {
     [Headers("Authorization: Bearer")]
     public interface IOrdersApi

@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using Refit;
-using Spike.TopstepX.Api.Apis.ProjectX;
+using Spike.TopstepX.Api.Common;
 using Spike.TopstepX.Api.Models.Account;
 using Spike.TopstepX.Api.Models.MarketData;
 using System.Net.WebSockets;
-using System.Security.Principal;
-using System.Text.Json;
 
 namespace Spike.TopstepX.Api
 {
@@ -15,7 +12,7 @@ namespace Spike.TopstepX.Api
         private const string userEndpoint = "https://rtc.topstepx.com/hubs/user";
         private const string marketEndpoint = "https://rtc.topstepx.com/hubs/market";
         private const string userName = "<<USERNAME>>";
-        private const string apiToken = "<<APITOKEN>>";
+        private const string apiToken = "<<APIKEY>>";
 
         private static AuthTokenHandler? _tokenStore;
         private static string _token = string.Empty;
@@ -30,7 +27,7 @@ namespace Spike.TopstepX.Api
         {
             try
             {
-                _tokenStore = new AuthTokenHandler(userName, apiToken);
+                _tokenStore = new AuthTokenHandler(userName, apiToken, apiEndpoint);
                 _token = await _tokenStore.GetToken();
 
                 Console.WriteLine("Accounts:");
@@ -62,7 +59,7 @@ namespace Spike.TopstepX.Api
                 _marketHub.Reconnected += (connectionId) => { Console.WriteLine($"Market Hub Reconnected: {connectionId}"); return Task.CompletedTask; };
                 await StartMarketHub(contracts);
 
-                await Task.Delay(300000);
+                await Task.Delay(30000);
             }
             catch (Exception ex)
             {
@@ -74,51 +71,38 @@ namespace Spike.TopstepX.Api
 
         private static async Task<List<SearchResult>> GetAccounts(CancellationToken cancellationToken = default)
         {
-            SearchResponse result;
             var response = string.Empty;
 
-            var accountApi = RestService.For<IAccountApi>(apiEndpoint, new RefitSettings
-            {
-                ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
+            var result = await ProjectXApi.Instance.Accounts.SearchAccounts(
+                new SearchRequest
                 {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                }),
-                AuthorizationHeaderValueGetter = async (request, cancellationToken) => await _tokenStore.GetToken(),
-            });
-            
-            result = await accountApi.SearchAccounts(new SearchRequest { OnlyActiveAccounts = true });
+                    OnlyActiveAccounts = true
+                });
 
             if (!result.Success)
             {
                 Console.WriteLine($"Error Connecting: {result.ErrorCode} - {result.ErrorMessage}");
             }
 
-            return result.Accounts;            
+            return result.Payload;            
         }
 
         private static async Task<List<Contract>> GetContracts(CancellationToken cancellationToken = default)
         {
-            ContractSearchResponse result;
             var response = string.Empty;
-            var marketDataApi = RestService.For<IMarketDataApi>(apiEndpoint, new RefitSettings
-            {
-                ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                }),
-                AuthorizationHeaderValueGetter = async (request, cancellationToken) => await _tokenStore.GetToken(),
-            });
 
-            result = await marketDataApi.GetContracts(new ContractSearchRequest { Live = false});
+            var result = await ProjectXApi.Instance.MarketData.GetContracts(
+                new ContractSearchRequest
+                {
+                    Live = false
+                });
             
             if (!result.Success)
             {
                 Console.WriteLine($"Error Connecting: {result.ErrorCode} - {result.ErrorMessage}");
             }
 
-            return result.Contracts;
+            return result.Payload;
         }
 
         private static async Task StartMarketHub(List<Contract> contracts)
@@ -150,11 +134,15 @@ namespace Spike.TopstepX.Api
                     
                     //???? - Experiment because I'm not getting events 
                     _marketHub.On<int, dynamic>("MarketData", (contractId, data) => { Console.WriteLine($"Receive Market Quote ({contractId}): {data}"); });
-                    
+                    Console.WriteLine($"Set Receive Market Quote");
+
                     // From example in docs.
                     _marketHub.On<int, dynamic>("GatewayQuote", (contractId, data) => { Console.WriteLine($"Receive Market Quote ({contractId}): {data}"); });
+                    Console.WriteLine($"Set Receive Market Quote");
                     _marketHub.On<int, dynamic>("GatewayTrade", (contractId, data) => { Console.WriteLine($"Receive Market Trades ({contractId}): {data}"); });
+                    Console.WriteLine($"Set Receive Market Trade");
                     _marketHub.On<int, dynamic>("GatewayDepth", (contractId, data) => { Console.WriteLine($"Receive Market Depth ({contractId}): {data}"); });
+                    Console.WriteLine($"Set Receive Depth");
 
                     contracts.ForEach(async (contract) =>
                     {

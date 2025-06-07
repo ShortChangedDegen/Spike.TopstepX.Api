@@ -1,14 +1,27 @@
 ﻿namespace Spike.TopstepX.Api.Models.Positions
 {
-    public record CloseRequest
+    /// <summary>
+    /// A close order request.
+    /// </summary>
+    /// <param name="accountId">The account ID associated with the close request</param>
+    /// <param name="contractId">The contract ID</param>
+    public record CloseRequest(int accountId, string contractId = "")
     {
         /// <summary>
-        /// The account ID.
+        /// Default Constructor for CloseRequest.
         /// </summary>
-        public int AccountId { get; set; }
+        public CloseRequest() : this(0, string.Empty)
+        {
+        }
+
         /// <summary>
-        /// 	Gets or sets the contract ID.
+        /// Gets or sets the account ID associated with the close request.
         /// </summary>
-        public string ContractId { get; set; }
+        public int AccountId { get; set; } = accountId;
+
+        /// <summary>
+        /// Gets or sets the contract ID.
+        /// </summary>
+        public string ContractId { get; set; } = contractId;
     }
 }

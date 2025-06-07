@@ -1,5 +1,8 @@
 ﻿namespace Spike.TopstepX.Api.Models.Orders
 {
+    /// <summary>
+    /// Represents the unit of time for aggregating market data or orders.
+    /// </summary>
     public enum Unit
     {
         None = 0,
