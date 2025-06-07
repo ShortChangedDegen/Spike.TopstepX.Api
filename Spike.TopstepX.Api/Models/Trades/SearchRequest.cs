@@ -15,7 +15,7 @@
         /// <summary>
         /// Getsthe start timestamp for the search.
         /// </summary>
-        public required DateTime StartTimestamp { get; set; } = startTimestamp
+        public required DateTime StartTimestamp { get; set; } = startTimestamp;
         /// <summary>
         /// Gets the end timestamp for the search.
         /// </summary>
