@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Spike.TopstepX.Api.Apis;
-using Spike.TopstepX.Api.Models.Account;
+using Spike.TopstepX.Api.Apis.Models.Account;
+using Spike.TopstepX.Api.Apis.Models.MarketData;
 using Spike.TopstepX.Api.Models.MarketData;
 using System.Net.WebSockets;
 
@@ -11,8 +12,8 @@ namespace Spike.TopstepX.Api
         private const string apiEndpoint = "https://api.topstepx.com";
         private const string userEndpoint = "https://rtc.topstepx.com/hubs/user";
         private const string marketEndpoint = "https://rtc.topstepx.com/hubs/market";
-        private const string userName = "amarquette78";
-        private const string apiToken = "/TsvJTH/zzIpTbF9rqLrs24ZiFCtrNW2hY23wTksffc=";
+        private const string userName = "<<USERNAME>>";
+        private const string apiToken = "<<PASSWORD>>";
 
         private static AuthTokenHandler? _tokenStore;
         private static string _token = string.Empty;

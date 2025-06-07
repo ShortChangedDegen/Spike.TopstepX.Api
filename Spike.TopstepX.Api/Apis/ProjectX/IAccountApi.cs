@@ -1,5 +1,5 @@
 ﻿using Refit;
-using Spike.TopstepX.Api.Models.Account;
+using Spike.TopstepX.Api.Apis.Models.Account;
 
 namespace Spike.TopstepX.Api.Apis.ProjectX
 {

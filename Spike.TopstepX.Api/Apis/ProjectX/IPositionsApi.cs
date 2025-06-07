@@ -1,6 +1,6 @@
 ﻿using Refit;
-using Spike.TopstepX.Api.Models;
-using Spike.TopstepX.Api.Models.Positions;
+using Spike.TopstepX.Api.Apis.Models;
+using Spike.TopstepX.Api.Apis.Models.Positions;
 
 namespace Spike.TopstepX.Api.Apis.ProjectX
 {

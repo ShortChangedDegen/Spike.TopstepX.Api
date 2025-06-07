@@ -1,5 +1,5 @@
 ﻿using Refit;
-using Spike.TopstepX.Api.Models.Trades;
+using Spike.TopstepX.Api.Apis.Models.Trades;
 
 namespace Spike.TopstepX.Api.Apis.ProjectX
 {
