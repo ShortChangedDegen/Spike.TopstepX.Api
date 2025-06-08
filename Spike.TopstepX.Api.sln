@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.TopstepX.Api", "Spike.TopstepX.Api\Spike.TopstepX.Api.csproj", "{01BE6AE9-5CB1-4451-9088-422154668431}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.TopstepX.Api.Tests", "Spike.TopstepX.Api.Tests\Spike.TopstepX.Api.Tests.csproj", "{12B90164-5474-467B-B83D-A3D44A5B77BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Tests", "Spike.TopstepX.Api.Tests\Spike.ProjectX.Api.Tests.csproj", "{12B90164-5474-467B-B83D-A3D44A5B77BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Example", "Spike.TopstepX.Api.Example\Spike.ProjectX.Api.Example.csproj", "{F7347956-D1A4-4E9D-8008-E723E3C1C971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Rest", "Spike.TopstepX.Api.Rest\Spike.ProjectX.Api.Rest.csproj", "{1B537384-E84C-42AB-A13F-4C9226B3A428}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01BE6AE9-5CB1-4451-9088-422154668431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01BE6AE9-5CB1-4451-9088-422154668431}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01BE6AE9-5CB1-4451-9088-422154668431}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01BE6AE9-5CB1-4451-9088-422154668431}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12B90164-5474-467B-B83D-A3D44A5B77BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12B90164-5474-467B-B83D-A3D44A5B77BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B90164-5474-467B-B83D-A3D44A5B77BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12B90164-5474-467B-B83D-A3D44A5B77BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7347956-D1A4-4E9D-8008-E723E3C1C971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7347956-D1A4-4E9D-8008-E723E3C1C971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7347956-D1A4-4E9D-8008-E723E3C1C971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7347956-D1A4-4E9D-8008-E723E3C1C971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B537384-E84C-42AB-A13F-4C9226B3A428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B537384-E84C-42AB-A13F-4C9226B3A428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B537384-E84C-42AB-A13F-4C9226B3A428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B537384-E84C-42AB-A13F-4C9226B3A428}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
