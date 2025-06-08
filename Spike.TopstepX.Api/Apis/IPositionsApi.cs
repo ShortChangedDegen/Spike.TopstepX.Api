@@ -2,7 +2,7 @@
 using Spike.TopstepX.Api.Models;
 using Spike.TopstepX.Api.Models.Positions;
 
-namespace Spike.TopstepX.Api.ProjectX
+namespace Spike.TopstepX.Api.Apis
 {
     [Headers("Authorization: Bearer")]
     public interface IPositionsApi

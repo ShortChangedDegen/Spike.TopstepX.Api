@@ -1,7 +1,7 @@
 ﻿using Refit;
 using Spike.TopstepX.Api.Models.Trades;
 
-namespace Spike.TopstepX.Api.ProjectX
+namespace Spike.TopstepX.Api.Apis
 {
     [Headers(
         "Accept: application/json", 

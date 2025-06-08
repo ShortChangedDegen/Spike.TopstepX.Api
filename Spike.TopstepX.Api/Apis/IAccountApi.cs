@@ -1,7 +1,7 @@
 ﻿using Refit;
 using Spike.TopstepX.Api.Models.Account;
 
-namespace Spike.TopstepX.Api.ProjectX
+namespace Spike.TopstepX.Api.Apis
 {
     public interface IAccountApi
     {

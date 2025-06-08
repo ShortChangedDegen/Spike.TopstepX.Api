@@ -1,6 +1,6 @@
 ﻿using Refit;
+using Spike.TopstepX.Api.Apis;
 using Spike.TopstepX.Api.Models.Account;
-using Spike.TopstepX.Api.ProjectX;
 using System.Text.Json;
 
 namespace Spike.TopstepX.Api.Common
@@ -12,7 +12,7 @@ namespace Spike.TopstepX.Api.Common
     /// <param name="username">The API username.</param>
     /// <param name="apiKey">The API SECRET key.</param>
     /// <param name="apiEndpoint">The API Url.</param>"
-    public class AuthTokenHandler(string username, string apiKey, string apiEndpoint)
+    internal class AuthTokenHandler(string username, string apiKey, string apiEndpoint)
     {        
         private string? _token = null;
 

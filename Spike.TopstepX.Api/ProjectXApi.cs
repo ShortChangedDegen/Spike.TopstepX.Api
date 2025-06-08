@@ -1,6 +1,6 @@
 ﻿using Refit;
+using Spike.TopstepX.Api.Apis;
 using Spike.TopstepX.Api.Common;
-using Spike.TopstepX.Api.ProjectX;
 using System.Text.Json;
 
 namespace Spike.TopstepX.Api
@@ -59,7 +59,7 @@ namespace Spike.TopstepX.Api
         /// Creates a service instance for the specified type using Refit.
         /// </summary>
         /// <typeparam name="T">The type defining the remote REST API.</typeparam>
-        /// <returns></returns>
+        /// <returns>The new API service.</returns>
         private T CreateService<T>() => RestService.For<T>(DefaultApiEndpoint, new RefitSettings
         {
             ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions

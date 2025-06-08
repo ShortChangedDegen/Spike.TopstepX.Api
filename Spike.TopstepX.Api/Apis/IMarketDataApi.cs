@@ -1,7 +1,7 @@
 ﻿using Refit;
 using Spike.TopstepX.Api.Models.MarketData;
 
-namespace Spike.TopstepX.Api.ProjectX
+namespace Spike.TopstepX.Api.Apis
 {
     [Headers("Authorization: Bearer")]
     public interface IMarketDataApi
