@@ -6,15 +6,16 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		LICENSE = LICENSE
 		README.md = README.md
 		SECURITY.md = SECURITY.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Tests", "Spike.TopstepX.Api.Tests\Spike.ProjectX.Api.Tests.csproj", "{12B90164-5474-467B-B83D-A3D44A5B77BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Tests", "Spike.ProjectX.Api.Tests\Spike.ProjectX.Api.Tests.csproj", "{12B90164-5474-467B-B83D-A3D44A5B77BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Example", "Spike.TopstepX.Api.Example\Spike.ProjectX.Api.Example.csproj", "{F7347956-D1A4-4E9D-8008-E723E3C1C971}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Example", "Spike.ProjectX.Api.Example\Spike.ProjectX.Api.Example.csproj", "{F7347956-D1A4-4E9D-8008-E723E3C1C971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api.Rest", "Spike.TopstepX.Api.Rest\Spike.ProjectX.Api.Rest.csproj", "{1B537384-E84C-42AB-A13F-4C9226B3A428}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike.ProjectX.Api", "Spike.ProjectX.Api\Spike.ProjectX.Api.csproj", "{1B537384-E84C-42AB-A13F-4C9226B3A428}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
