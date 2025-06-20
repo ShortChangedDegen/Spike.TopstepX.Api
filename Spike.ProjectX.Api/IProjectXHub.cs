@@ -9,8 +9,8 @@ namespace Spike.ProjectX.Api
 {
     public interface IProjectXHub
     {
-        MarketHub MarketHub { get; }
-        UserHub UserHub { get; }
+        MarketEventDispatcher MarketHub { get; }
+        UserEventDispatcher UserHub { get; }
 
         void Dispose();
         void Subscribe(params IObserver<MarketDepthEvent>[] observers);

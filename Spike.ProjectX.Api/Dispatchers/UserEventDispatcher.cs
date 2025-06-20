@@ -11,14 +11,14 @@ namespace Spike.ProjectX.Api.Events
     /// <summary>
     /// Represents a hub for user-related events such as account, order, position, and trade updates.
     /// </summary>
-    public class UserHub : IDisposable, IUserHub
+    public class UserEventDispatcher : IDisposable, IUserEventDispatcher
     {
         protected List<IDisposable> subscribers = new();
 
-        protected IEventHub<UserAccountEvent> userAccountHub;
-        protected IEventHub<UserOrderEvent> userOrderHub;
-        protected IEventHub<UserPositionEvent> userPositionHub;
-        protected IEventHub<UserTradeEvent> userTradeHub;
+        protected IEventDispatcher<UserAccountEvent> userAccountHub;
+        protected IEventDispatcher<UserOrderEvent> userOrderHub;
+        protected IEventDispatcher<UserPositionEvent> userPositionHub;
+        protected IEventDispatcher<UserTradeEvent> userTradeHub;
 
         protected readonly HubConnection hubConnection;
         protected readonly AuthTokenHandler authTokenHandler;
@@ -26,11 +26,11 @@ namespace Spike.ProjectX.Api.Events
         private bool disposeHubConnection = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserHub"/> class.
+        /// Initializes a new instance of the <see cref="UserEventDispatcher"/> class.
         /// </summary>
         /// <param name="api">The ProjectX API.</param>
         /// <param name="settings">The ProjectX settings.</param>
-        public UserHub(AuthTokenHandler authTokenHandler, IOptions<ProjectXSettings> projectXSettings)
+        public UserEventDispatcher(AuthTokenHandler authTokenHandler, IOptions<ProjectXSettings> projectXSettings)
         {
             Guard.NotNull(projectXSettings.Value, nameof(projectXSettings));
 
@@ -43,14 +43,14 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserHub"/> class.
+        /// Initializes a new instance of the <see cref="UserEventDispatcher"/> class.
         /// </summary>
         /// <param name="connection">The shared <see cref="HubConnection">.</param>
-        public UserHub(HubConnection connection) =>
+        public UserEventDispatcher(HubConnection connection) =>
             hubConnection = Guard.NotNull(connection, nameof(connection));
 
         /// <summary>
-        /// Starts the <see cref="UserHub"/>.
+        /// Starts the <see cref="UserEventDispatcher"/>.
         /// </summary>
         /// <returns>A task.</returns>
         public async Task StartAsync()
@@ -62,28 +62,28 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Gets an <see cref="EventHub{TEvent}"/> for <see cref="UserAccountEvent"/>s.
+        /// Gets an <see cref="EventDispatcher{TEvent}"/> for <see cref="UserAccountEvent"/>s.
         /// </summary>
-        public virtual IEventHub<UserAccountEvent> UserAccountHub =>
+        public virtual IEventDispatcher<UserAccountEvent> UserAccountHub =>
             userAccountHub ??= new UserAccountHub(hubConnection);
 
         /// <summary>
-        /// Gets an <see cref="EventHub{TEvent}"/> for <see cref="UserOrderEvent"/>s.
+        /// Gets an <see cref="EventDispatcher{TEvent}"/> for <see cref="UserOrderEvent"/>s.
         /// </summary>
-        public virtual IEventHub<UserOrderEvent> UserOrderHub =>
-            userOrderHub ??= new UserOrderHub(hubConnection);
+        public virtual IEventDispatcher<UserOrderEvent> UserOrderHub =>
+            userOrderHub ??= new UserOrderEventDispatcher(hubConnection);
 
         /// <summary>
-        /// Gets an <see cref="EventHub{TEvent}"/> for <see cref="UserPositionEvent"/>s.
+        /// Gets an <see cref="EventDispatcher{TEvent}"/> for <see cref="UserPositionEvent"/>s.
         /// </summary>
-        public virtual IEventHub<UserPositionEvent> UserPositionHub =>
-            userPositionHub ??= new UserPositionHub(hubConnection);
+        public virtual IEventDispatcher<UserPositionEvent> UserPositionHub =>
+            userPositionHub ??= new UserPositionEventDispatcher(hubConnection);
 
         /// <summary>
-        /// Gets an <see cref="EventHub{TEvent}"/> for <see cref="UserTradeEvent"/>s.
+        /// Gets an <see cref="EventDispatcher{TEvent}"/> for <see cref="UserTradeEvent"/>s.
         /// </summary>
-        public virtual IEventHub<UserTradeEvent> UserTradeHub =>
-            userTradeHub ??= new UserTradeHub(hubConnection);
+        public virtual IEventDispatcher<UserTradeEvent> UserTradeHub =>
+            userTradeHub ??= new UserTradeEventDispatcher(hubConnection);
 
         /// <summary>
         /// Subscribes one or more observers to <see cref="UserAccountEvent">s.
@@ -135,7 +135,7 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Disposes the resources used by the <see cref="UserHub"/> class.
+        /// Disposes the resources used by the <see cref="UserEventDispatcher"/> class.
         /// </summary>
         public void Dispose()
         {

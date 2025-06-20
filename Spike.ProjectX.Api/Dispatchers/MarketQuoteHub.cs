@@ -9,8 +9,8 @@ namespace Spike.ProjectX.Api.Events
     /// Initializes a new instance of the <see cref="MarketQuoteHub"/> class.
     /// </summary>
     public class MarketQuoteHub : 
-        EventHub<MarketQuoteEvent>, 
-        IEventHub<MarketQuoteEvent>
+        EventDispatcher<MarketQuoteEvent>, 
+        IEventDispatcher<MarketQuoteEvent>
     {
         public MarketQuoteHub(HubConnection connection)
             : base(connection, "GatewayQuote") // Pass parameters to the base class constructor

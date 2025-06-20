@@ -8,7 +8,7 @@ namespace Spike.ProjectX.Api.Events
     /// Base class for event hubs that handle events of type <typeparamref name="TEvent"/>.
     /// </summary>
     /// <typeparam name="TEvent">The type of <see cref="IEvent"/>.</typeparam>
-    public abstract class EventHub<TEvent> : IEventHub<TEvent>
+    public abstract class EventDispatcher<TEvent> : IEventDispatcher<TEvent>
         where TEvent : IEvent
     {
         protected HubConnection hubConnection;
@@ -20,23 +20,23 @@ namespace Spike.ProjectX.Api.Events
         protected List<TEvent> events = new();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventHub{TEvent}"/>
+        /// Initializes a new instance of the <see cref="EventDispatcher{TEvent}"/>
         /// class with the specified <paramref name="connection"/>.
         /// </summary>
         /// <param name="connection">The <see cref="HubConnection"/>.</param>
-        protected EventHub(HubConnection connection)
+        protected EventDispatcher(HubConnection connection)
         {            
             hubConnection = Guard.NotNull(connection, nameof(connection));
             hubConnection.On<TEvent>(PublishMethodName, Publish);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventHub{TEvent}"/>
+        /// Initializes a new instance of the <see cref="EventDispatcher{TEvent}"/>
         /// class with the specified <paramref name="connection"/>.
         /// </summary>
         /// <param name="connection">The <see cref="HubConnection"/>.</param>
         /// /// <param name="publishMethodName">The method name used to subscribe to published events.</param>
-        protected EventHub(HubConnection connection, string publishMethodName)
+        protected EventDispatcher(HubConnection connection, string publishMethodName)
         {            
             hubConnection = Guard.NotNull(connection, nameof(connection));
             publishMethod = Guard.NotNullOrEmpty(publishMethodName, nameof(publishMethodName));
@@ -87,7 +87,7 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Disposes the resources used by the <see cref="EventHub{TEvent}"/> class.
+        /// Disposes the resources used by the <see cref="EventDispatcher{TEvent}"/> class.
         /// </summary>
         public void Dispose()
         {
@@ -97,7 +97,7 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Disposes the resources used by the <see cref="EventHub{TEvent}"/> class.
+        /// Disposes the resources used by the <see cref="EventDispatcher{TEvent}"/> class.
         /// </summary>
         /// <param name="disposing">true if disposing; otherwise, false.</param>
         protected virtual void Dispose(bool disposing)

@@ -2,11 +2,11 @@
 
 namespace Spike.ProjectX.Api.Events
 {
-    public interface IMarketHub : IDisposable
+    public interface IMarketEventDispatcher : IDisposable
     {
-        IEventHub<MarketDepthEvent> MarketDepthHub { get; }
-        IEventHub<MarketQuoteEvent> MarketQuoteHub { get; }
-        IEventHub<MarketTradeEvent> MarketTradeHub { get; }
+        IEventDispatcher<MarketDepthEvent> MarketDepthHub { get; }
+        IEventDispatcher<MarketQuoteEvent> MarketQuoteHub { get; }
+        IEventDispatcher<MarketTradeEvent> MarketTradeHub { get; }
 
         /// <summary>
         /// Subscribes one or more observers to <see cref="MarketDepthHub">.

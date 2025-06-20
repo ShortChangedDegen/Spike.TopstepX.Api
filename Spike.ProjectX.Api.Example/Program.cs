@@ -12,8 +12,8 @@ namespace Spike.ProjectX.Api.Example
 {
     internal class Program
     {
-        private static IUserHub _userHub;
-        private static IMarketHub _marketHub;
+        private static IUserEventDispatcher _userHub;
+        private static IMarketEventDispatcher _marketHub;
 
         private static IProjectXApi _projectXApi;
 
@@ -29,8 +29,8 @@ namespace Spike.ProjectX.Api.Example
                 .ConfigureServices((context, services) =>
                 {
                     services.Configure<ProjectXSettings>(opts => context.Configuration.GetSection("ProjectX").Bind(opts));
-                    services.AddSingleton<IUserHub, UserHub>();
-                    services.AddSingleton<IMarketHub, MarketHub>();
+                    services.AddSingleton<IUserEventDispatcher, UserEventDispatcher>();
+                    services.AddSingleton<IMarketEventDispatcher, MarketEventDispatcher>();
                     services.AddSingleton<IProjectXApi, ProjectXApi>();
                     services.AddSingleton<IProjectXHub, ProjectXHub>();
                     services.AddSingleton<AuthTokenHandler>();
@@ -62,10 +62,10 @@ namespace Spike.ProjectX.Api.Example
                 var contracts = await GetContracts();
                 contracts.ForEach(x => Console.WriteLine($"{x.Id} - {x.Name}, {x.Description}"));
 
-                _userHub = app.Services.GetService<IUserHub>();
-                _marketHub = app.Services.GetService<IMarketHub>();                
+                _userHub = app.Services.GetService<IUserEventDispatcher>();
+                _marketHub = app.Services.GetService<IMarketEventDispatcher>();                
 
-                await _userHub.StartAsync(); 
+                await _userHub.StartAsync();
                 await _marketHub.StartAsync();
 
 

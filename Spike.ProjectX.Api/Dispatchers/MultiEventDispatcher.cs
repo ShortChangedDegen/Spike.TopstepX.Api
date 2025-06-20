@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Spike.ProjectX.Api.Models;
 using Spike.ProjectX.Api.Utility;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Spike.ProjectX.Api.Events
 {
-    public abstract class MultiEventHub<T, TEvent> : EventHub<TEvent>, IEventHub<TEvent>
+    public abstract class MultiEventDispatcher<T, TEvent> : EventDispatcher<TEvent>, IEventDispatcher<TEvent>
         where T : ICollection<TEvent>, new()
         where TEvent : IEvent
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventHub{TEvent}"/>
+        /// Initializes a new instance of the <see cref="EventDispatcher{TEvent}"/>
         /// class with the specified <paramref name="connection"/>.
         /// </summary>
         /// <param name="connection">The <see cref="HubConnection"/>.</param>
         /// /// <param name="publishMethodName">The method name used to subscribe to published events.</param>
-        protected MultiEventHub(HubConnection connection, string publishMethodName)
+        protected MultiEventDispatcher(HubConnection connection, string publishMethodName)
             : base(connection, publishMethodName)
         {
             Guard.NotNull(connection, nameof(connection));
@@ -35,7 +36,7 @@ namespace Spike.ProjectX.Api.Events
             foreach (var @event in @events)
             {
                 base.Publish(@event);
-            }            
+            }
         }
     }
 }

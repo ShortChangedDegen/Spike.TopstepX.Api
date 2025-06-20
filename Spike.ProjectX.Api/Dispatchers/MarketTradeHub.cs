@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using Spike.ProjectX.Api.Models.Positions;
-using System;
+using Spike.ProjectX.Api.Models.MarketData;
 
 namespace Spike.ProjectX.Api.Events
 {
@@ -8,9 +7,9 @@ namespace Spike.ProjectX.Api.Events
     /// Initializes a new instance of the <see cref="MarketTradeHub"/> class.
     /// </summary>
     /// <param name="connection">The <see cref="HubConnection"/>.</param>
-    public class UserPositionHub(HubConnection connection) :
-        EventHub<UserPositionEvent>(connection, "GatewayUserPosition"),
-        IEventHub<UserPositionEvent>
+    public class MarketTradeHub(HubConnection connection) : 
+        MultiEventDispatcher<List<MarketTradeEvent>, MarketTradeEvent>(connection, "GatewayTrade"),
+        IEventDispatcher<MarketTradeEvent>
     {
     }
 }

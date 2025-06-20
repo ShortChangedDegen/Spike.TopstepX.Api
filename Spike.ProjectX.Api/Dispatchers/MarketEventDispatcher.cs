@@ -9,13 +9,13 @@ namespace Spike.ProjectX.Api.Events
     /// <summary>
     /// Represents a hub for market events such as quotes, trades, and depth updates.
     /// </summary>
-    public class MarketHub : IDisposable, IMarketHub
+    public class MarketEventDispatcher : IDisposable, IMarketEventDispatcher
     {
         protected List<IDisposable> subscribers = new();
 
-        protected IEventHub<MarketQuoteEvent> marketQuoteHub;
-        protected IEventHub<MarketTradeEvent> marketTradeHub;
-        protected IEventHub<MarketDepthEvent> marketDepthHub;
+        protected IEventDispatcher<MarketQuoteEvent> marketQuoteHub;
+        protected IEventDispatcher<MarketTradeEvent> marketTradeHub;
+        protected IEventDispatcher<MarketDepthEvent> marketDepthHub;
 
         protected HubConnection hubConnection;
         protected readonly AuthTokenHandler authTokenHandler;
@@ -25,10 +25,10 @@ namespace Spike.ProjectX.Api.Events
         private bool disposeHubConnection = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketHub"/> class.
+        /// Initializes a new instance of the <see cref="MarketEventDispatcher"/> class.
         /// </summary>
         /// <param name="projectXSettings">The ProjectX settings.</param>
-        public MarketHub(AuthTokenHandler handler, IOptions<ProjectXSettings> projectXSettings)
+        public MarketEventDispatcher(AuthTokenHandler handler, IOptions<ProjectXSettings> projectXSettings)
         {
             projectXSettings = Guard.NotNull(projectXSettings, nameof(projectXSettings));
 
@@ -42,7 +42,7 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Starts the <see cref="MarketHub"/>.
+        /// Starts the <see cref="MarketEventDispatcher"/>.
         /// </summary>
         /// <returns>A task.</returns>
         public async Task StartAsync()
@@ -56,19 +56,19 @@ namespace Spike.ProjectX.Api.Events
         /// <summary>
         /// Gets the market quote event hub.
         /// </summary>
-        public IEventHub<MarketQuoteEvent> MarketQuoteHub =>
+        public IEventDispatcher<MarketQuoteEvent> MarketQuoteHub =>
             marketQuoteHub ??= new MarketQuoteHub(hubConnection);
 
         /// <summary>
         /// Gets the market trade event hub.
         /// </summary>
-        public IEventHub<MarketTradeEvent> MarketTradeHub =>
+        public IEventDispatcher<MarketTradeEvent> MarketTradeHub =>
             marketTradeHub ??= new MarketTradeHub(hubConnection);
 
         /// <summary>
         /// Gets the market depth event hub.
         /// </summary>
-        public IEventHub<MarketDepthEvent> MarketDepthHub =>
+        public IEventDispatcher<MarketDepthEvent> MarketDepthHub =>
             marketDepthHub ??= new MarketDepthHub(hubConnection);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Spike.ProjectX.Api.Events
             subscribers.AddRange(observers.Select(MarketTradeHub.Subscribe));
 
         /// <summary>
-        /// Disposes the resources used by the <see cref="MarketHub"/> class.
+        /// Disposes the resources used by the <see cref="MarketEventDispatcher"/> class.
         /// </summary>
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
@@ -116,7 +116,7 @@ namespace Spike.ProjectX.Api.Events
         }
 
         /// <summary>
-        /// Disposes the resources used by the <see cref="UserHub"/> class.
+        /// Disposes the resources used by the <see cref="UserEventDispatcher"/> class.
         /// </summary>
         public void Dispose()
         {

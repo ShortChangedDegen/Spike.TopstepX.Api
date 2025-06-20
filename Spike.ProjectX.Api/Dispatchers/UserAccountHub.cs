@@ -8,8 +8,8 @@ namespace Spike.ProjectX.Api.Events
     /// </summary>
     /// <param name="connection">The <see cref="HubConnection"/>.</param>
     public class UserAccountHub(HubConnection connection) : 
-        EventHub<UserAccountEvent>(connection, "GatewayUserAccount"), 
-        IEventHub<UserAccountEvent>
+        EventDispatcher<UserAccountEvent>(connection, "GatewayUserAccount"), 
+        IEventDispatcher<UserAccountEvent>
     {        
     }
 }

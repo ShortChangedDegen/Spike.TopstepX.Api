@@ -5,12 +5,12 @@ using Spike.ProjectX.Api.Models.Trades;
 
 namespace Spike.ProjectX.Api.Events
 {
-    public interface IUserHub : IDisposable
+    public interface IUserEventDispatcher : IDisposable
     {
-        IEventHub<UserAccountEvent> UserAccountHub { get; }
-        IEventHub<UserOrderEvent> UserOrderHub { get; }
-        IEventHub<UserPositionEvent> UserPositionHub { get; }
-        IEventHub<UserTradeEvent> UserTradeHub { get; }
+        IEventDispatcher<UserAccountEvent> UserAccountHub { get; }
+        IEventDispatcher<UserOrderEvent> UserOrderHub { get; }
+        IEventDispatcher<UserPositionEvent> UserPositionHub { get; }
+        IEventDispatcher<UserTradeEvent> UserTradeHub { get; }
 
         Task StartAsync();
         void Subscribe(params IObserver<UserAccountEvent>[] observers);

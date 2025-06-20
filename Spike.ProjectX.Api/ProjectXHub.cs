@@ -26,7 +26,7 @@ namespace Spike.ProjectX.Api
         /// </summary>
         /// <param name="marketHub">A market hub.</param>
         /// <param name="userHub">A user hub.</param>
-        internal ProjectXHub(MarketHub marketHub, UserHub userHub)
+        internal ProjectXHub(MarketEventDispatcher marketHub, UserEventDispatcher userHub)
         {
             UserHub = Guard.NotNull(userHub, nameof(userHub));
             MarketHub = Guard.NotNull(marketHub, nameof(marketHub));
@@ -38,19 +38,19 @@ namespace Spike.ProjectX.Api
         /// <param name="api">The ProjectX API.</param>
         /// <param name="settings">The ProjectX settings.</param>
         public ProjectXHub(AuthTokenHandler authTokenHandler, IOptions<ProjectXSettings> settings)
-            : this(new MarketHub(authTokenHandler, settings), new UserHub(authTokenHandler, settings))
+            : this(new MarketEventDispatcher(authTokenHandler, settings), new UserEventDispatcher(authTokenHandler, settings))
         {
         }
 
         /// <summary>
         /// Gets the <see cref="UserHub"/>.
         /// </summary>
-        public UserHub UserHub { get; }
+        public UserEventDispatcher UserHub { get; }
 
         /// <summary>
         /// Gets the <see cref="MarketHub"/>.
         /// </summary>
-        public MarketHub MarketHub { get; }
+        public MarketEventDispatcher MarketHub { get; }
 
         /// <summary>
         /// Subscribes one or more observers for <see cref="MarketQuoteEvent"/>s.

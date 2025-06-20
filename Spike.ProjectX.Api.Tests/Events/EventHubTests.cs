@@ -28,7 +28,7 @@ namespace Spike.ProjectX.Api.Tests.Hubs
 
     }
 
-    public class StubEventHub : EventHub<Stub>
+    public class StubEventHub : EventDispatcher<Stub>
     {
         public StubEventHub(HubConnection connection, string publishMethodName)
             : base(connection, publishMethodName)

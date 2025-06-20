@@ -7,7 +7,7 @@ namespace Spike.ProjectX.Api.Events
     /// subscribe to events of type <typeparamref name="TEvent"/>.
     /// </summary>
     /// <typeparam name="TEvent"></typeparam>
-    public interface IEventHub<TEvent> : IObservable<TEvent>, IDisposable
+    public interface IEventDispatcher<TEvent> : IObservable<TEvent>, IDisposable
         where TEvent : IEvent
     {
     }
